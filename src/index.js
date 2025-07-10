@@ -16,14 +16,14 @@ app.use(cors());
 app.use(express.json());
 
 // autenticação básica
-app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 
 // CRUD público
-app.use('/api/categories',    categoryRoutes);
-app.use('/api/users',         userRoutes);
-app.use('/api/books',         bookRoutes);
-app.use('/api/announcements', announcementRoutes);
-app.use('/api/negotiations',  negotiationRoutes);
+app.use('/categories',    categoryRoutes);
+app.use('/users',         userRoutes);
+app.use('/books',         bookRoutes);
+app.use('/announcements', announcementRoutes);
+app.use('/negotiations',  negotiationRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI)
