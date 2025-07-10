@@ -12,7 +12,12 @@ const negotiationRoutes  = require('./routes/negotiations');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:8080',
+    'https://Luca-Scandola.github.io/Site-novo-db'
+  ]
+}))
 app.use(express.json());
 
 // autenticação básica
