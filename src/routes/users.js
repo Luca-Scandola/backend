@@ -1,22 +1,19 @@
 const router = require('express').Router();
-const Book   = require('../models/Book');
+const User   = require('../models/User');
 
 router.get('/', async (_req, res) => {
-  const books = await Book.find()
-    .populate('id_categoria', 'nome')
-    .populate('id_vendedor',  'nome email');
-  res.json(books);
+  res.json(await User.find());
 });
 
 router.get('/:id', async (req, res) => {
-  const b = await Book.findById(req.params.id);
-  if (!b) return res.status(404).json({ error: 'Livro não encontrado' });
-  res.json(b);
+  const u = await User.findById(req.params.id);
+  if (!u) return res.status(404).json({ error: 'Usuário não encontrado' });
+  res.json(u);
 });
 
 router.post('/', async (req, res) => {
   try {
-    const novo = await Book.create(req.body);
+    const novo = await User.create(req.body);
     res.status(201).json(novo);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -25,7 +22,7 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   try {
-    const updated = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const updated = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updated);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -33,7 +30,7 @@ router.put('/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  await Book.findByIdAndDelete(req.params.id);
+  await User.findByIdAndDelete(req.params.id);
   res.status(204).send();
 });
 
